@@ -26,7 +26,7 @@ Users can register as mentors or mentees, publish or buy courses, and schedule l
 - Class scheduling system per course
 - User profiles and dashboard integration
 
-### 🛠️ In Progress (YOU are building this part 🔥)
+### 🛠️ In Progress
 - Real-time **Chat** between mentors and mentees
 - **Video Calling** support (for scheduled sessions)
 
@@ -63,7 +63,7 @@ Users can register as mentors or mentees, publish or buy courses, and schedule l
 
 ## 👥 Contributors
 
-- **Arnav Choubey** — Chat, Video Calling, System refactoring, Real dev 😎  
+- **Arnav Choubey** — Chat, Video Calling, System refactoring
 - **Shubham Kumar** — Initial structure & feature prototype (Auth, DB, scheduling)
 
 ---
