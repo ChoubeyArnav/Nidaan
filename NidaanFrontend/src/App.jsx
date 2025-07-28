@@ -21,23 +21,25 @@ function App() {
     <AuthProvider>
       <Router>
         <Header />
-        <div className="pt-16">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/update-profile" element={<UpdateProfile />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/add-skill" element={<AddSkill />} />
-            <Route path="/mentors/:mentorId" element={<MentorProfile />} />
-            <Route path="/dashboard" element={<MyConnectionsPage />} />
-            <Route path="/schedule-session" element={<ScheduleSessionPage />} />
-            <Route path="/upcoming-sessions" element={<UpcomingSessionsPage />} />
-            <Route path="/session-history" element={<SessionHistoryPage />} />
-            <Route path="/chat" element={<ChatPage />} />
-          </Routes>
-        </div>
+        <main className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 px-4 sm:px-8 md:px-16">
+          <div className="max-w-7xl mx-auto">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/update-profile" element={<UpdateProfile />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/add-skill" element={<AddSkill />} />
+              <Route path="/mentors/:mentorId" element={<MentorProfile />} />
+              <Route path="/dashboard" element={<MyConnectionsPage />} />
+              <Route path="/schedule-session" element={<ScheduleSessionPage />} />
+              <Route path="/upcoming-sessions" element={<UpcomingSessionsPage />} />
+              <Route path="/session-history" element={<SessionHistoryPage />} />
+              <Route path="/chat" element={<ChatPage />} />
+            </Routes>
+          </div>
+        </main>
       </Router>
     </AuthProvider>
   );

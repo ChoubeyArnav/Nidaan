@@ -1,5 +1,11 @@
 // ChatPage.jsx
-import React, { useEffect, useState, useContext, useRef, useLayoutEffect } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import socket from "../socket";
 import api from "../api/axios";
 import { AuthContext } from "../AuthContext";
@@ -172,36 +178,36 @@ export default function ChatPage() {
     new Date(ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
   return (
-    <div className="flex h-[90vh] mt-16">
-      {/* Contact Sidebar */}
-      <div className="w-1/3 bg-gray-100 border-r overflow-y-auto">
-        <div className="p-4 text-xl font-bold border-b">Contacts</div>
+    <div className="flex h-[90vh] mt-16 font-sans">
+      {/* Contacts Sidebar */}
+      <div className="w-1/3 bg-gray-50 border-r border-gray-200 overflow-y-auto">
+        <div className="p-4 text-xl font-semibold text-gray-800 border-b">
+          Contacts
+        </div>
         {contacts.map((c) => (
           <div
             key={c._id}
             onClick={() =>
               setCurrentChat(
-                chats.find((chat) =>
-                  chat.members.some((m) => m._id === c._id)
-                )
+                chats.find((chat) => chat.members.some((m) => m._id === c._id))
               )
             }
-            className={`p-4 flex justify-between items-center cursor-pointer border-b hover:bg-green-100 ${
+            className={`p-4 flex justify-between items-center cursor-pointer border-b transition hover:bg-green-50 ${
               currentChat?.members.some((m) => m._id === c._id)
-                ? "bg-green-200"
+                ? "bg-green-100"
                 : ""
             }`}
           >
             <div className="flex items-center gap-3">
               <img
                 src={c.avatar || "/default-avatar.png"}
-                className="w-10 h-10 rounded-full"
-                alt=""
+                className="w-10 h-10 rounded-full object-cover border"
+                alt="avatar"
               />
               <div>
-                <div className="font-medium">{c.fullName}</div>
+                <div className="font-medium text-gray-800">{c.fullName}</div>
                 <div className="text-xs text-gray-500">
-                  {c.lastMessage?.slice(0, 20)}
+                  {c.lastMessage?.slice(0, 30)}
                 </div>
               </div>
             </div>
@@ -215,19 +221,23 @@ export default function ChatPage() {
       </div>
 
       {/* Chat Window */}
-      <div className="flex-1 flex flex-col bg-white">
+      <div className="flex-1 flex flex-col bg-white border-l border-gray-200">
         <div className="flex-1 overflow-y-auto p-4" ref={messagesContainerRef}>
           {messages.map((msg, idx) => {
             const isSelf = msg.sender?._id === currentUser._id;
             return (
               <div
                 key={idx}
-                className={`mb-3 flex ${isSelf ? "justify-end" : "justify-start"}`}
+                className={`mb-3 flex ${
+                  isSelf ? "justify-end" : "justify-start"
+                }`}
               >
                 <div
                   className={`${
-                    isSelf ? "bg-green-500 text-white" : "bg-gray-200 text-black"
-                  } p-3 rounded-2xl max-w-[75%] text-sm whitespace-pre-wrap`}
+                    isSelf
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-100 text-gray-800"
+                  } p-3 rounded-2xl max-w-[75%] text-sm whitespace-pre-wrap shadow-sm`}
                 >
                   {renderContent(msg)}
                   <div className="text-[10px] text-right mt-1 text-gray-300">
@@ -240,11 +250,13 @@ export default function ChatPage() {
         </div>
 
         {typing && (
-          <div className="px-4 py-1 text-sm text-gray-500">Typing...</div>
+          <div className="px-4 py-1 text-sm text-gray-500 animate-pulse">
+            Typing...
+          </div>
         )}
 
         {currentChat && (
-          <div className="border-t p-3 flex items-center gap-2">
+          <div className="border-t border-gray-200 p-3 flex items-center gap-2 bg-gray-50">
             <label className="relative cursor-pointer">
               <Paperclip className="w-5 h-5 text-gray-500" />
               <input
@@ -254,7 +266,9 @@ export default function ChatPage() {
               />
               {file && (
                 <div className="absolute -top-2 -right-2 bg-green-600 text-white text-xs p-1 rounded-full flex items-center">
-                  <span className="mr-1">{file.name.slice(0, 10)}...</span>
+                  <span className="mr-1 max-w-[80px] truncate">
+                    {file.name}
+                  </span>
                   <X
                     className="w-3 h-3 cursor-pointer"
                     onClick={() => setFile(null)}
@@ -267,7 +281,7 @@ export default function ChatPage() {
               type="text"
               value={newMessage}
               placeholder="Type a message..."
-              className="flex-1 border rounded-full px-4 py-2"
+              className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
               onChange={(e) => {
                 setNewMessage(e.target.value);
                 clearTimeout(typingTimer.current);
@@ -285,7 +299,7 @@ export default function ChatPage() {
 
             <button
               onClick={handleSendMessage}
-              className="bg-green-600 text-white px-5 py-2 rounded-full"
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full transition"
             >
               Send
             </button>
