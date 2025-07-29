@@ -73,7 +73,7 @@ const Header = () => {
         ) : (
           <>
             <img
-              src={user.data.user.avatar || "/default-avatar.png"}
+              src={user?.data?.user.avatar || "/default-avatar.png"}
               alt="avatar"
               className="w-10 h-10 rounded-full object-cover cursor-pointer border border-gray-300"
               onClick={() => setShowMenu((prev) => !prev)}
@@ -100,7 +100,7 @@ const Header = () => {
                     Change Password
                   </Link>
 
-                  {user.data.user.role === "mentor" && (
+                  {user?.data?.user.role === "mentor" && (
                     <>
                       <Link
                         to="/add-skill"
@@ -123,7 +123,7 @@ const Header = () => {
                     </>
                   )}
 
-                  {user.data.user.role === "user" && (
+                  {user?.data?.user.role === "user" && (
                     <Link
                       to="/dashboard"
                       className="px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition text-sm font-medium text-gray-800 dark:text-gray-200"
